@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public abstract class Dinero implements Serializable {
+public abstract class Dinero implements Serializable, Comparable<Dinero> {
     private int valor;
     private int anyo;
 
@@ -40,22 +40,12 @@ public abstract class Dinero implements Serializable {
         return "El año es: " + anyo + " El valor es: " + valor;
     }
 
-    public void compareTo(Dinero din){//arreglar
-        if(din.anyo > this.anyo){
-            System.out.println("El " + din.toString() + " su año es mayor que el de " + this.toString());
-        }else if(din.anyo < this.anyo){
-            System.out.println(this.toString() + " su año es mayor que el de " + din.toString());
-        }else if(din.anyo == this.anyo){
-            System.out.println("El " + din.toString() + " el año es igual que el de " + this.toString());
+    public int compareTo(Dinero din){//arreglar
+        int resultado = Integer.compare(this.valor, din.valor);
+        if (resultado == 0) {
+            resultado = Integer.compare(this.anyo, din.anyo);
         }
-
-        if(din.valor > this.valor){
-            System.out.println("El " + din.toString() + " su valor es mayor que el de " + this.toString());
-        }else if(din.valor < this.valor){
-            System.out.println(this.toString() + " su valor es mayor que el de " + din.toString());
-        }else if(din.valor == this.valor){
-            System.out.println("El " + din.toString() + " el valor es igual que el de " + this.toString());
-        }
+        return resultado;
 
     }
 

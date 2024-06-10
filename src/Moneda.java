@@ -15,11 +15,11 @@ public class Moneda extends Dinero{
         this.peso = peso;
     }
 
-    public Moneda(Moneda mon){
-        mon.setAnyo(this.getAnyo());
-        mon.setValor(this.getValor());
-        mon.setDiametro(this.getDiametro());
-        mon.setPeso(this.getPeso());
+    public Moneda(Object mon){
+        ((Dinero) mon).setAnyo(this.getAnyo());
+        ((Dinero) mon).setValor(this.getValor());
+        ((Moneda) mon).setDiametro(this.getDiametro());
+        ((Moneda) mon).setPeso(this.getPeso());
     }
 
 

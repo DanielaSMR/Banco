@@ -13,11 +13,11 @@ public class Billete extends Dinero{
     }
 
     
-    public Billete(Billete bill){
-        bill.setAnyo(this.getAnyo());
-        bill.setValor(this.getValor());
-        bill.setAltura(this.getAltura());
-        bill.setAnchura(this.getAnchura());
+    public Billete(Object bill){
+        ((Dinero) bill).setAnyo(this.getAnyo());
+        ((Dinero) bill).setValor(this.getValor());
+        ((Billete) bill).setAltura(this.getAltura());
+        ((Billete) bill).setAnchura(this.getAnchura());
     }
 
     @Override

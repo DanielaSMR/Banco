@@ -12,84 +12,69 @@ import java.util.HashMap;
 */
 public class main {
 
-    public static ArrayList<Empleado> empleados = new ArrayList<>();
-    public static HashMap<String,Empleado> ordEmpleados = new HashMap<String,Empleado>(); 
     public static final String EMPLEADOS_ARCHIVO = "empleados.ser";
 
     //Meter try catch
 
     public static void main(String[] args) throws Exception{
         
-          try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
-        }
+        //   try {
+        //     Class.forName("org.postgresql.Driver");
+        // } catch (ClassNotFoundException ex) {
+        //     System.out.println("Error al registrar el driver de PostgreSQL: " + ex);
+        // }
 
-        Connection connection = null;
-        // Database connect
-        // Conectamos con la base de datos
-        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mati2", "mati", "mati");
-        //connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "a");
-        Statement st = connection.createStatement();
-        connection.setAutoCommit(false);
+        // Connection connection = null;
+        // // Database connect
+        // // Conectamos con la base de datos
+        // connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/mati2", "mati", "mati");
+        // //connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "a");
+        // Statement st = connection.createStatement();
+        // connection.setAutoCommit(false);
 
         int eleccion;
         String id;
         do{
             System.out.println("Elige una opcion\n"+
-            "1- Dar de alta a un empleado en el sistema:\n"+
-            "2- Dar de baja a un empleado en el sistema.\n"+
-            "3- Búsqueda de empleados dentro del sistema\n"+
-            "4- Listar empleados.\n"+
-           "5- Guardar datos actuales\n"+
-            "6- Cargar datos guardados\n"+
-            "7- Guardar datos actuales en BD\n"+
-            "8- Cargar datos guardado en BD");
+            "1- Crear dinero\n"+
+            "2- Mostrar dinero\n"+
+            "3- Comprobar si hay dos objetos iguales y mostrar un mensaje que lo indique\n"+
+            "4- Ordenar el arraylist con el compareTo\n"+
+            "5- Crear copias del objeto\n"+
+            "6- Buscar dinero\n"+
+            "7- Modificar los atributos de dimension\n" +
+            "8- Eliminar objetos\n" +
+            "9- Salir");
             eleccion = (int)Integer.parseInt(IO.pedirTexto());
             switch (eleccion) {
                 case 1:
                     try{
-                        GestorEmpleados.añadirEmpleado();
-                    }catch(SalarioInvalidoException sie){
-                        System.err.println(sie.getMessage());
+                        gestionDinero.añadirDinero();
+                    }catch(Exception ex){
+                        ex.getMessage();
                     }
                     break;
                 case 2:
-                    GestorEmpleados.listarEmpleados();
-                    System.out.println("Dime la id del empleado a eliminar");
-                    id = IO.pedirTexto();
-                    try{
-                    GestorEmpleados.eliminarEmpleado(id);
-                    }catch(EmpleadoNoEncontrado ene){
-                        System.err.println(ene.getMessage());
-                    }
+                    gestionDinero.mostrarTodos();
                     break;
                 case 3:
-                    GestorEmpleados.listarEmpleados();
-                    System.out.println("Dime la id del empleado buscado");
-                    id = IO.pedirTexto();
-                    try{
-                    GestorEmpleados.buscarEmpleado(id);
-                    }catch(EmpleadoNoEncontrado ene){
-                        System.err.println(ene.getMessage());
-                    }
+                    gestionDinero.sonIguales();
                     break;
                 case 4:
-                    GestorEmpleados.listarEmpleados();
+                    gestionDinero.ordArray();
                     break;
                 case 5:
-                    GestorEmpleados.guardarDatosEnFichero(EMPLEADOS_ARCHIVO);
+                    gestionDinero.copiarDinero();
                     break; 
-                case 6:
-                    GestorEmpleados.cargarDatosDesdeFichero(EMPLEADOS_ARCHIVO);
-                    break;
-                case 7:
-                    GestorEmpleados.guardarEnDB(st);
-                    break;
-                case 8:
-                    GestorEmpleados.cargarDatosDesdeBD(st);
-                    break;        
+                // case 6:
+                //     GestorEmpleados.cargarDatosDesdeFichero(EMPLEADOS_ARCHIVO);
+                //     break;
+                // case 7:
+                //     GestorEmpleados.guardarEnDB(st);
+                //     break;
+                // case 8:
+                //     GestorEmpleados.cargarDatosDesdeBD(st);
+                //     break;        
                 case 9:
                     System.out.println("Adios");
                     break;
