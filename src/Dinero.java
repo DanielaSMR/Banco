@@ -14,10 +14,10 @@ public abstract class Dinero implements Serializable, Comparable<Dinero> {
     }
 
     public Dinero(Dinero dinero){
-        dinero.setAnyo(this.getAnyo());
-        dinero.setValor(this.getValor());
+        this.anyo = dinero.anyo;
+        this.valor = dinero.valor;
     }
-
+    
     public int getValor() {
         return valor;
     }

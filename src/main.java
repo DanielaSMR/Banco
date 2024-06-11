@@ -66,15 +66,15 @@ public class main {
                 case 5:
                     gestionDinero.copiarDinero();
                     break; 
-                // case 6:
-                //     GestorEmpleados.cargarDatosDesdeFichero(EMPLEADOS_ARCHIVO);
-                //     break;
-                // case 7:
-                //     GestorEmpleados.guardarEnDB(st);
-                //     break;
-                // case 8:
-                //     GestorEmpleados.cargarDatosDesdeBD(st);
-                //     break;        
+                case 6:
+                    gestionDinero.buscarDinero();
+                    break;
+                case 7:
+                    gestionDinero.modificarElementos();
+                    break;
+                case 8:
+                    gestionDinero.eliminarDinero();
+                    break;        
                 case 9:
                     System.out.println("Adios");
                     break;

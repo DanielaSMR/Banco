@@ -85,24 +85,127 @@ public class gestionDinero {
     }
 
 
-    public static void copiarDinero(){
+    public static void copiarDinero() throws Exception{
         mostrarTodos();//arreglar
         System.out.println("COPIAR DINEROS\n *****************");
         System.out.println("Cual quieres copiar?");
-        int eleccion = (int)Integer.parseInt(IO.pedirTexto());
-        int contador = 0;
-        for(Dinero din : dineros){
-            if(contador == eleccion && din instanceof Moneda){
-                Moneda monedaTemporal = new Moneda(din);
-                dineros.add(monedaTemporal);
-            }else if(contador == eleccion && din instanceof Billete){
-                Billete billeteTemporal = new Billete(din);
-                dineros.add(billeteTemporal);
-            }
-            contador++;
+        int eleccion = IO.pedirRango(0, dineros.size());
+        Dinero seleccionado = dineros.get(eleccion);
+        if(seleccionado instanceof Moneda){
+            Moneda monedaTemporal = new Moneda((Moneda) seleccionado);
+            dineros.add(monedaTemporal);
+        }else if(seleccionado instanceof Billete){
+            Billete billeteTemporal = new Billete((Billete) seleccionado);
+            dineros.add(billeteTemporal);
         }
+        System.out.println("Copia realizada con exito");
         mostrarTodos();
 
+    }
+
+    public static void buscarDinero() throws Exception{
+        System.out.println("BUSCAR DINERO \n *****************");
+        System.out.println("Segun que quieres buscar el dinero?\n" + 
+                            "1- Tipo(Billete o Moneda)\n" +
+                            "2- Valor\n"+
+                            "3- Año de fabricacion\n");
+        int seleccion = IO.pedirRango(1, 3);
+        switch (seleccion) {
+            case 1:
+                System.out.println("Buscas 1-Monedas o 2-Billetes");
+                int tipo = IO.pedirRango(1, 2);
+                for(Dinero din : dineros){
+                    if(tipo == 1 && din instanceof Moneda){
+                        System.out.println(din.toString());
+                    }else if(tipo == 2 && din instanceof Billete){
+                        System.out.println(din.toString());
+                    }
+                }
+                break;
+            case 2:
+                System.out.println("Que valor buscas?");
+                int valor = IO.pedirEntero();
+                boolean encontrado = false;
+                for(Dinero din : dineros){
+                    if(din.getValor() == valor){
+                        System.out.println(din.toString());
+                        encontrado = true;
+                    }
+                }
+                if(!encontrado){
+                    System.out.println("No se encontro ninguno con ese valor");
+                }
+                break;
+            case 3:
+                System.out.println("Que año buscas?");
+                int anyo = IO.pedirEntero();
+                boolean encontrado2 = false;
+                for(Dinero din : dineros){
+                    if(din.getAnyo() == anyo){
+                        System.out.println(din.toString());
+                        encontrado2 = true;
+                    }
+                }
+                if(!encontrado2){
+                    System.out.println("No se encontro ninguno con ese valor");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public static void modificarElementos() throws Exception{
+        mostrarTodos();
+        System.out.println("MODIFICAR ELEMENTOS\n **********");
+        System.out.println("Cual quieres modificar");
+        int eleccion = IO.pedirRango(0, dineros.size());
+
+        Dinero seleccionado = dineros.get(eleccion);
+
+        System.out.println("Que quieres modificar?");
+        System.out.println("1- Año de fabricacion\n 2- Valor");
+        if(seleccionado instanceof Moneda){//Lo mismo para billete
+            System.out.println("3- Altura\n 4- Anchura");
+            int rangoMon = IO.pedirRango(1, 4);
+            switch (rangoMon) {
+                case 1:
+                    System.out.println("Dime el nuevo año");
+                    int anyo = IO.pedirEntero();
+                    seleccionado.setAnyo(anyo);
+                    break;
+                case 2:
+                    System.out.println("Dime el nuevo valor");
+                    int valor = IO.pedirEntero();
+                    seleccionado.setAnyo(valor);
+                    break;
+                case 3:
+                    System.out.println("Dime el nuevo diametro");
+                    int diametro = IO.pedirEntero();
+                    ((Moneda) seleccionado).setDiametro(diametro);
+                    break;
+                case 4:
+                    System.out.println("Dime el nuevo peso");
+                    int peso = IO.pedirEntero();
+                    ((Moneda) seleccionado).setPeso(peso);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    public static void eliminarDinero() throws Exception{
+        System.out.println("ELIMINAR DINERO\n **************");
+        mostrarTodos();
+        System.out.println("Cual quieres eliminar?");
+        int eleccion = IO.pedirRango(0, dineros.size());
+
+        Dinero seleccionado = dineros.get(eleccion);
+        System.out.println("Eliminando..." + seleccionado.toString());
+        dineros.remove(eleccion);
+        
+        mostrarTodos();
 
     }
 }
